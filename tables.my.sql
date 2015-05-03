@@ -1,6 +1,8 @@
 -- phpMyAdmin SQL Dump
 -- version 3.1.5
 -- http://www.phpmyadmin.net
+--
+-- Serveur: nicolas.montarnal.sql.free.fr
 -- Généré le : Dim 11 Décembre 2011 à 20:26
 -- Version du serveur: 5.0.83
 -- Version de PHP: 5.2.9
@@ -14,7 +16,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données: `GRR`
+-- Base de données: `nicolas_montarnal`
 --
 
 -- --------------------------------------------------------
