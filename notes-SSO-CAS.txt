@@ -1,0 +1,27 @@
+Modifications liées au Single Sign-Out
+
+Le Single Sign-Out est implémenté dans phpCAS à partir de la version 1.0.0 :
+http://www.ja-sig.org/wiki/display/CASC/phpCAS+ChangeLog 
+
+
+Le Single Sign-Out est la possibilité d'utiliser le serveur CAS pour déconnecter automatiquement l'utilisateur sur toutes les applications à la fois.
+Sans single sign-out, l'utilisateur est déconnecté de CAS, mais toutes les sessions ouvertes sur les applications en SSO restent ouvertes (ce qui pose un problème essentiel de sécurité...). En effet, après réception d'un ticket valide, les applications clients ne revérifient pas systématiquement que la session est toujours active sur le serveur d'authentification (cela génèrerait un flux inutile de requêtes).
+
+Ce n'est que dans les versions les plus récentes de phpCAS que le single-sign out est pris en charge. Une application PHP utilise des connexions stateless (la connexion n'est pas maintenue au-delà de la requête initiale et de sa réponse), et il n'est donc pas possible de transmettre aux applications l'ordre de terminer une session lors d'un logout de CAS.
+La manière dont phpCAS a réglé le problème est d'utiliser le nom de la session pour conserver le numéro de ticket CAS, et donc savoir quelle session interrompre. Concrètement, ça se passe de la manière suivante :
+- connexion de l'utilisateur sur CAS
+- authentification
+- création d'un ticket CAS
+- accès à l'application cliente (Grr)
+- création par l'application d'un cookie de sesssion dont le nom contient le numéro de ticket (*, voir ci-dessous)
+- utilisation de l'application
+- retour au portail
+- déconnexion (fin de la validité du ticket au niveau du serveur cas)
+- le serveur CAS renvoie à toutes les applications enregistrées une requête de logout, qui contient le numéro de ticket
+- l'application cliente intercepte cette requête de logout grâce à la méthode phpCAS::handleLogoutRequests(false); (l'argument 'false' est là simplement pour ne pas effectuer de vérification du client duquel provient la requête de logout)
+- l'interception de logout termine la session de l'utilisateur
+- lorsque l'utilisateur essaie de se connecter à nouveau sur l'application cliente avec son cookie de session, l'application détecte bien que le cookie ne correspond plus à une session valide
+
+* : pour avoir une session qui contient le numéro de ticket, il est indispensable que ce soit phpCAS qui s'occupe d'initier la session php, et non Grr lui-même. C'est à cela que sert le dernier argument "true" de
+phpCAS::client(CAS_VERSION_2_0,$serveurSSO,$serveurSSOPort,$serveurSSORacine,true);
+Ainsi, phpCAS gére lui-même la création du cookie de session.
