@@ -43,7 +43,7 @@ $nb_year_calendar permet de fixer la plage de choix de l'année dans le choix des
 La plage s'étend de année_en_cours - $nb_year_calendar à année_en_cours + $nb_year_calendar
 Par exemple, si on fixe $nb_year_calendar = 5 et que l'on est en 2005, la plage de choix de l'année s'étendra de 2000 à 2010
 */
-$nb_year_calendar = 10;
+$nb_year_calendar = 20;
 
 # Avance en nombre d'heure du serveur sur les postes clients
 # Le paramètre $correct_diff_time_local_serveur permet de corriger une différence d'heure entre le serveur et les postes clients
