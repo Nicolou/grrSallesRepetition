@@ -5,7 +5,7 @@ echo ("<H1>SALUT</H1>");
 /**
  * index.php
  * Ce script fait partie de l'application GRR
- * Dernière modification : $Date: 2009-06-04 15:30:17 $
+ * Derniï¿½re modification : $Date: 2009-06-04 15:30:17 $
  * @author    Laurent Delineau <laurent.delineau@ac-poitiers.fr>
  * @author    Marc-Henri PAMISEUX <marcori@users.sourceforge.net>
  * @copyright Copyright 2003-2008 Laurent Delineau
@@ -46,8 +46,8 @@ echo ("<H1>SALUT</H1>");
  */
 
 
-/* Pour ce script, on cherche à afficher toutes les erreurs PHP
-(sauf dans le cas d'un serveur LCS car sinon, des erreurs dues à des scripts LCS apparaissent.
+/* Pour ce script, on cherche ï¿½ afficher toutes les erreurs PHP
+(sauf dans le cas d'un serveur LCS car sinon, des erreurs dues ï¿½ des scripts LCS apparaissent.
 */
 if (!@file_exists("/var/www/lcs/includes/headerauth.inc.php"))
     error_reporting (E_ALL);
@@ -57,9 +57,9 @@ if (file_exists("include/connect.inc.php"))
 require_once("include/misc.inc.php");
 require_once("include/functions.inc.php");
 require_once("include/settings.inc.php");
-// Paramètres langage
+// Paramï¿½tres langage
 include "include/language.inc.php";
-// Dans le cas d'une base mysql, on teste la bonne installation de la base et on propose une installation automatisée.
+// Dans le cas d'une base mysql, on teste la bonne installation de la base et on propose une installation automatisï¿½e.
 if ($dbsys == "mysql")
 {
 
@@ -71,8 +71,7 @@ if ($dbsys == "mysql")
   
       
       require_once("include/connect.inc.php");
-
-echo ("<H1>je suis la $dbHost $dbUser $dbPass</H1>");	      
+ 
       
       if (@mysql_connect("$dbHost", "$dbUser", "$dbPass"))
     { 
@@ -88,11 +87,11 @@ echo ("<H1>je suis la $dbHost $dbUser $dbPass</H1>");
             $j++;
           }
           if ($flag == 'yes') {
-             $msg = "<p>La connection au serveur $dbsys est établie mais certaines tables sont absentes de la base $dbDb.</p>";
+             $msg = "<p>La connection au serveur $dbsys est ï¿½tablie mais certaines tables sont absentes de la base $dbDb.</p>";
              $correct_install = 'no';
           }
           /*
-          // Premier test (test remplacé par le précédent car il semblerait que sur certaines installation, l'utilisateur de la base n'avait pas le droit d'éxécuter "show tables" !)
+          // Premier test (test remplacï¿½ par le prï¿½cï¿½dent car il semblerait que sur certaines installation, l'utilisateur de la base n'avait pas le droit d'ï¿½xï¿½cuter "show tables" !)
           $liste2 = array();
           $tableNames = mysql_query("SHOW TABLES FROM ".$dbDb);
           if ($tableNames) {
@@ -111,7 +110,7 @@ echo ("<H1>je suis la $dbHost $dbUser $dbPass</H1>");
                 $j++;
              }
              if ($flag == 'yes') {
-                $msg = "<p>La connection au serveur $dbsys est établie mais certaines tables sont absentes de la base $dbDb.</p>";
+                $msg = "<p>La connection au serveur $dbsys est ï¿½tablie mais certaines tables sont absentes de la base $dbDb.</p>";
                 $correct_install = 'no';
              }
           }
@@ -119,13 +118,13 @@ echo ("<H1>je suis la $dbHost $dbUser $dbPass</H1>");
         }
       else
         {
-          $msg = "La connection au serveur $dbsys est établie mais impossible de sélectionner la base contenant les tables GRR.";
+          $msg = "La connection au serveur $dbsys est ï¿½tablie mais impossible de sï¿½lectionner la base contenant les tables GRR.";
           $correct_install = 'no';
             }
         }
       else
     {
-      $msg = "Erreur de connection au serveur $dbsys. Le fichier \"connect.inc.php\" ne contient peut-être pas les bonnes informations de connection.";
+      $msg = "Erreur de connection au serveur $dbsys. Le fichier \"connect.inc.php\" ne contient peut-ï¿½tre pas les bonnes informations de connection.";
       $correct_install = 'no';
         }
     }
@@ -136,12 +135,12 @@ echo ("<H1>je suis la $dbHost $dbUser $dbPass</H1>");
     }
   if ($correct_install=='no')
     {
-      echo begin_page("GRR (Gestion et Réservation de Ressources) ");
-      echo "<h1 class=\"center\">Gestion et Réservation de Ressources</h1>\n";
+      echo begin_page("GRR (Gestion et Rï¿½servation de Ressources) ");
+      echo "<h1 class=\"center\">Gestion et Rï¿½servation de Ressources</h1>\n";
       echo "<div style=\"text-align:center;\"><span style=\"color:red;font-weight:bold\">".$msg."</span>\n";
-      echo "<ul><li>Soit vous procédez à une mise à jour vers une nouvelle version de GRR. Dans ce cas, vous devez procéder à une mise à jour de la base de données MySql.<br />";
-      echo "<b><a href='./admin_maj.php'>Mettre à jour la base Mysql</a></b><br /></li>";
-      echo "<li>Soit l'installation de GRR n'est peut-être pas terminée. Vous pouvez procéder à une installation/réinstallation de la base.<br />";
+      echo "<ul><li>Soit vous procï¿½dez ï¿½ une mise ï¿½ jour vers une nouvelle version de GRR. Dans ce cas, vous devez procï¿½der ï¿½ une mise ï¿½ jour de la base de donnï¿½es MySql.<br />";
+      echo "<b><a href='./admin_maj.php'>Mettre ï¿½ jour la base Mysql</a></b><br /></li>";
+      echo "<li>Soit l'installation de GRR n'est peut-ï¿½tre pas terminï¿½e. Vous pouvez procï¿½der ï¿½ une installation/rï¿½installation de la base.<br />";
         echo "<a href='install_mysql.php'>Installer la base $dbsys</a></li></ul></div>";
         ?>
         </body>
@@ -166,11 +165,11 @@ $cook = session_get_cookie_params();
 if ((getSettingValue('sso_statut') == 'cas_visiteur') or (getSettingValue('sso_statut') == 'cas_utilisateur'))
 {
   require_once("./include/cas.inc.php");
-  // A ce stade, l'utilisateur est authentifié par CAS
+  // A ce stade, l'utilisateur est authentifiï¿½ par CAS
   $password = '';
   $user_ext_authentifie = 'cas';
   $result = grr_opensession($login,$password,$user_ext_authentifie) ;
-  // On écrit les données de session et ferme la session
+  // On ï¿½crit les donnï¿½es de session et ferme la session
   session_write_close();
   $message = '';
   if ($result=="2")
@@ -221,11 +220,11 @@ else if ((getSettingValue('sso_statut') == 'lemon_visiteur') or (getSettingValue
       die();
       echo "</body></html>";
     }
-  // A ce stade, l'utilisateur est authentifié par Lemonldap
+  // A ce stade, l'utilisateur est authentifiï¿½ par Lemonldap
   $user_ext_authentifie = 'lemon';
   $password = '';
   $result = grr_opensession($login,$password,$user_ext_authentifie) ;
-  // On écrit les données de session et ferme la session
+  // On ï¿½crit les donnï¿½es de session et ferme la session
   session_write_close();
   $message = '';
   if ($result=="2")
@@ -271,8 +270,8 @@ else if (getSettingValue('sso_statut') == 'lcs')
       foreach($groups as $value) {
           $lcs_groups[] = $value["cn"];
       }
-      // A ce stade, l'utilisateur est authentifié par LCS
-      // Etablir à nouveau la connexion à la base
+      // A ce stade, l'utilisateur est authentifiï¿½ par LCS
+      // Etablir ï¿½ nouveau la connexion ï¿½ la base
       if (empty($db_nopersist))
           $db_c = mysql_pconnect($dbHost, $dbUser, $dbPass);
       else
@@ -288,7 +287,7 @@ else if (getSettingValue('sso_statut') == 'lcs')
          $user_ext_authentifie = 'lcs_non_eleve';
       $password = '';
       $result = grr_opensession($login,$password,$user_ext_authentifie,$lcs_tab_login,$lcs_groups) ;
-      // On écrit les données de session et ferme la session
+      // On ï¿½crit les donnï¿½es de session et ferme la session
       session_write_close();
       $message = '';
       if ($result=="2") {
@@ -317,8 +316,8 @@ else if (getSettingValue('sso_statut') == 'lcs')
            header("Location: ".htmlspecialchars_decode(page_accueil())."");
       }
   } else {
-    // L'utilisateur n'a pas été identifié'
-      if (getSettingValue("authentification_obli")==1) { // authentification obligatoire, l'utilisateur est renvoyé vers une page de connexion
+    // L'utilisateur n'a pas ï¿½tï¿½ identifiï¿½'
+      if (getSettingValue("authentification_obli")==1) { // authentification obligatoire, l'utilisateur est renvoyï¿½ vers une page de connexion
          require_once("include/session.inc.php");
          grr_closeSession($_GET['auto']);
          header("Location:".LCS_PAGE_AUTHENTIF);
@@ -335,7 +334,7 @@ if ((getSettingValue('sso_statut') == 'lasso_visiteur') or (getSettingValue('sso
     {
       // S'il y a eu une erreur et que l'on revient, afficher
       // l'erreur. Cela annule la redirection de header(), mais
-      // l'utilisateur pourra quand même cliquer manuellement sur un
+      // l'utilisateur pourra quand mï¿½me cliquer manuellement sur un
       // lien.
       $error = lassospkit_error();
       if (!empty($error))
@@ -343,15 +342,15 @@ if ((getSettingValue('sso_statut') == 'lasso_visiteur') or (getSettingValue('sso
 	  echo "SSO error:<br /><pre>$error</pre><br />";
 	}
 
-      // Pas encore authentifié - on se connecte:
+      // Pas encore authentifiï¿½ - on se connecte:
       $return_url = $_SERVER['REQUEST_URI'];
       lassospkit_redirect_federate($return_url);
       exit();
     }
 
-  // A ce stade, l'utilisateur est authentifié par Lasso
+  // A ce stade, l'utilisateur est authentifiï¿½ par Lasso
   $password = '';
-  $login = lassospkit_userid(); // vide si pas encore fédéré
+  $login = lassospkit_userid(); // vide si pas encore fï¿½dï¿½rï¿½
 
   if (empty($login))
     {
@@ -371,7 +370,7 @@ if ((getSettingValue('sso_statut') == 'lasso_visiteur') or (getSettingValue('sso
 	}
       $login = 'lasso_'.($max+1);
 
-      // Stockage de la défération
+      // Stockage de la dï¿½fï¿½ration
       lassospkit_set_userid($login);
     }
 
@@ -380,15 +379,15 @@ if ((getSettingValue('sso_statut') == 'lasso_visiteur') or (getSettingValue('sso
   $tab_login["nom"] = "Nonyme";
   $tab_login["email"] = "";
 
-  // S'il y a des attributs supplémentaires, on les utilise
+  // S'il y a des attributs supplï¿½mentaires, on les utilise
   $attributes = lassospkit_get_assertion_attributes();
   if ($attributes) {
     // Get infos from the Identity Provider
     $user_infos = array();
-    // Nom Prénom
+    // Nom Prï¿½nom
     list($tab_login['nom'], $tab_login['fullname']) = split(' ', $attributes['cn'][0]);
     $tab_login['email'] = $attributes['mail'][0];
-    // Pour l'instant on ne redéfinit pas le login
+    // Pour l'instant on ne redï¿½finit pas le login
     //$tab_login['???'] = $attributes['username'][0];
   }
 
@@ -397,12 +396,12 @@ if ((getSettingValue('sso_statut') == 'lasso_visiteur') or (getSettingValue('sso
   // Stocker le nameid dans la session pour se souvenir que c'est
   // un login lasso
   $_SESSION['lasso_nameid'] = lassospkit_nameid();
-  // Ne plus réutiliser la session spkitlasso courante, pour
-  // éviter les problèmes de nettoyage au logout distant
+  // Ne plus rï¿½utiliser la session spkitlasso courante, pour
+  // ï¿½viter les problï¿½mes de nettoyage au logout distant
   lassospkit_set_nameid(null);
   lassospkit_clean();
 
-  // On écrit les données de session et ferme la session
+  // On ï¿½crit les donnï¿½es de session et ferme la session
   session_write_close();
   $message = '';
   if ($result=="2")
@@ -412,7 +411,7 @@ if ((getSettingValue('sso_statut') == 'lasso_visiteur') or (getSettingValue('sso
     }
   else if ($result == "3")
     {
-      // L'utilisateur existe déjà
+      // L'utilisateur existe dï¿½jï¿½
       $message = get_vocab("echec_connexion_GRR");
       $message .= "<br />". get_vocab("importation_impossible");
     }
@@ -444,18 +443,18 @@ if ((getSettingValue('sso_statut') == 'lasso_visiteur') or (getSettingValue('sso
 }
 else if ((getSettingValue('sso_statut') == 'http_visiteur') or (getSettingValue('sso_statut') == 'http_utilisateur'))
 {
-    // Nous utilisons les fonction d'authentification par PHP (plutôt que par Apache) à l'aide des lignes :
+    // Nous utilisons les fonction d'authentification par PHP (plutï¿½t que par Apache) ï¿½ l'aide des lignes :
     // header('WWW-Authenticate: Basic realm="..."'); et header('HTTP/1.0 401 Unauthorized');
-    // Mais ces fonctions ne sont disponibles que si PHP est exécuté comme module Apache,
+    // Mais ces fonctions ne sont disponibles que si PHP est exï¿½cutï¿½ comme module Apache,
     // et non pas sous la forme d'un CGI.
-    // Si PHP est en mode cgi il faut utiliser une réecriture de l'url vie le module rewrite de apache :
-    // Vous devez créer un fichier .htaccess ayant comme contenu
+    // Si PHP est en mode cgi il faut utiliser une rï¿½ecriture de l'url vie le module rewrite de apache :
+    // Vous devez crï¿½er un fichier .htaccess ayant comme contenu
     //  <IfModule mod_rewrite.c>
     //  RewriteEngine on
     //  RewriteRule .* - [E=REMOTE_USER:%,L]
     //  </IfModule>
-    // Cela permet de récupérer dans $_SERVER['REMOTE_USER'] le login et le mot de passe
-    // mais crypté :
+    // Cela permet de rï¿½cupï¿½rer dans $_SERVER['REMOTE_USER'] le login et le mot de passe
+    // mais cryptï¿½ :
     // on obtient le login et le password sous la forme : user:password
 
 
@@ -465,25 +464,25 @@ else if ((getSettingValue('sso_statut') == 'http_visiteur') or (getSettingValue(
     // Pour les versions plus anciennes de PHP < 4.1.0 (en fait inutile ici car GRR exige PHP > 4.3.1
     } else if (isset($HTTP_SERVER_VARS['PHP_AUTH_USER']) && !empty($HTTP_SERVER_VARS['PHP_AUTH_USER'])) {
         $login = $HTTP_SERVER_VARS['PHP_AUTH_USER'];
-    // L'utilisateur est authentifié mais $_SERVER['PHP_AUTH_USER'] est vide, on tente de récupérer le login dans $_SERVER['REMOTE_USER']
+    // L'utilisateur est authentifiï¿½ mais $_SERVER['PHP_AUTH_USER'] est vide, on tente de rï¿½cupï¿½rer le login dans $_SERVER['REMOTE_USER']
     } else if (isset($_SERVER['REMOTE_USER']) && !empty($_SERVER['REMOTE_USER'])) {
         // Cas ou PHP est en mode cgi
         if (preg_match('/Basic+(.*)$/i', $_SERVER['REMOTE_USER'], $matches) ) {
-           // Si PHP est en mode cgi il faut utiliser une réecriture de l'url vie le module rewrite de apache :
-           // Vous devez créer un fichier .htaccess ayant comme contenu
+           // Si PHP est en mode cgi il faut utiliser une rï¿½ecriture de l'url vie le module rewrite de apache :
+           // Vous devez crï¿½er un fichier .htaccess ayant comme contenu
            //  <IfModule mod_rewrite.c>
            //  RewriteEngine on
            //  RewriteRule .* - [E=REMOTE_USER:%,L]
            //  </IfModule>
-           // Cela permet de récupérer dans $_SERVER['REMOTE_USER'] le login et le mot de passe
-           // mais crypté :
+           // Cela permet de rï¿½cupï¿½rer dans $_SERVER['REMOTE_USER'] le login et le mot de passe
+           // mais cryptï¿½ :
            // on obtient le login et le password sous la forme : user:password
            $identifiers = base64_decode($matches[1]);
            // on l'exporte dans un tableau
            $identifiers_tab = explode(':', $identifiers);
-           // on récupère le tout dans des variables
+           // on rï¿½cupï¿½re le tout dans des variables
            $login = strip_tags($identifiers_tab[0]);
-           // le mot de passe peut être récupéré dans strip_tags($identifiers_tab[1]) mais on n'en a pas besoin ici
+           // le mot de passe peut ï¿½tre rï¿½cupï¿½rï¿½ dans strip_tags($identifiers_tab[1]) mais on n'en a pas besoin ici
         } else {
         // Cas normal
             $login = $_SERVER['REMOTE_USER'];
@@ -494,9 +493,9 @@ else if ((getSettingValue('sso_statut') == 'http_visiteur') or (getSettingValue(
     } else {
         // on demande de s'identifier
         // A ce stade :
-        // - soit l'utilisateur ne s'est pas encore identifié
-        // - soit l'utilisateur s'est identifié mais de façon incorrecte
-        // - soit l'utilisateur s'est identifié de façon correcte mais l'identifiant n'a pas pu être récupéré.
+        // - soit l'utilisateur ne s'est pas encore identifiï¿½
+        // - soit l'utilisateur s'est identifiï¿½ mais de faï¿½on incorrecte
+        // - soit l'utilisateur s'est identifiï¿½ de faï¿½on correcte mais l'identifiant n'a pas pu ï¿½tre rï¿½cupï¿½rï¿½.
         $my_message = "Module d'authentification de GRR";
         header('WWW-Authenticate: Basic realm="' . $my_message . '"');
         header('HTTP/1.0 401 Unauthorized');
@@ -507,11 +506,11 @@ else if ((getSettingValue('sso_statut') == 'http_visiteur') or (getSettingValue(
         echo "</body></html>";
         exit();
     }
-    // A ce stade, l'utilisateur est authentifié et $login n'est pas vide via le serveur apache
+    // A ce stade, l'utilisateur est authentifiï¿½ et $login n'est pas vide via le serveur apache
     $user_ext_authentifie = 'apache';
     $password = '';
     $result = grr_opensession($login,$password,$user_ext_authentifie);
-    // On écrit les données de session et ferme la session
+    // On ï¿½crit les donnï¿½es de session et ferme la session
     session_write_close();
     $message = '';
     if ($result=="2")

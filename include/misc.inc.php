@@ -3,7 +3,7 @@
  * misc.inc.php
  * fichier de variables diverses
  * Ce script fait partie de l'application GRR
- * Dernière modification : $Date: 2009-06-04 15:30:17 $
+ * Derniï¿½re modification : $Date: 2009-06-04 15:30:17 $
  * @author    Laurent Delineau <laurent.delineau@ac-poitiers.fr>
  * @copyright Copyright 2003-2008 Laurent Delineau
  * @link      http://www.gnu.org/licenses/licenses.html
@@ -46,12 +46,12 @@
 #################################
 $grr_devel_email = "laurent.delineau@ac-poitiers.fr";
 $grr_devel_url = "http://grr.mutualibre.org";
-// Numéro de version actuel
+// Numï¿½ro de version actuel
 $version_grr = "1.9.6";
-// Numéro de sous-version actuel (a, b, ...)
-// Utilisez cette variable pour des versions qui corrigent la la version finale sans toucher à la base.
+// Numï¿½ro de sous-version actuel (a, b, ...)
+// Utilisez cette variable pour des versions qui corrigent la la version finale sans toucher ï¿½ la base.
 $sous_version_grr = "b";
-// Numéro de la release candidate (doit être strictement inférieure à 9). Laisser vide s'il s'agit de la version stable.
+// Numï¿½ro de la release candidate (doit ï¿½tre strictement infï¿½rieure ï¿½ 9). Laisser vide s'il s'agit de la version stable.
 $version_grr_RC = "";
 
 # Liste des tables
@@ -62,21 +62,23 @@ $liste_tables = array(
 "_calendrier_jours_cycle",
 "_entry",
 "_entry_moderate",
-"_type_area",
-"_j_type_area",
+"_forfait_archive",
+"_forfait_credit",
 "_j_mailuser_room",
+"_j_site_area",
+"_j_type_area",
 "_j_user_area",
 "_j_user_room",
+"_j_useradmin_area",
+"_j_useradmin_site",
 "_log",
+"_overload",
 "_repeat",
 "_room",
 "_setting",
-"_utilisateurs",
-"_j_useradmin_area",
-"_overload",
 "_site",
-"_j_useradmin_site",
-"_j_site_area",
+"_type_area",
+"_utilisateurs"
 );
 
 # Liste des feuilles de style
@@ -95,7 +97,7 @@ $liste_themes = array(
 $liste_name_themes = array(
 "Grand bleu",
 "Forestier",
-"Doré",
+"Dorï¿½",
 "Orange",
 "Argent",
 "Volcan",
@@ -114,61 +116,61 @@ $liste_language = array(
 
 # Liste des noms des langues
 $liste_name_language = array(
-"Français",
+"Franï¿½ais",
 "Deutch",
 "English",
 "Italiano",
 "Spanish"
 );
 
-# Compatibilité avec les version inférieures à 1.9.6
+# Compatibilitï¿½ avec les version infï¿½rieures ï¿½ 1.9.6
 if ((!isset($table_prefix)) or ($table_prefix==''))
     $table_prefix="grr";
-# Définition de TABLE_PREFIX
+# Dï¿½finition de TABLE_PREFIX
 define("TABLE_PREFIX",$table_prefix);
 
 
 ################################################
-# Configuration du planning : valeurs par défaut
+# Configuration du planning : valeurs par dï¿½faut
 # Une interface en ligne permet une configuration domaine par domaine de ces valeurs
 ################################################
-# Resolution - quel bloc peut être réservé, en secondes
+# Resolution - quel bloc peut ï¿½tre rï¿½servï¿½, en secondes
 # remarque : 1800 secondes = 1/2 heure.
 $resolution = 900;
 
-# Durée maximale de réservation, en minutes
-# -1 : désactivation de la limite
+# Durï¿½e maximale de rï¿½servation, en minutes
+# -1 : dï¿½sactivation de la limite
 $duree_max_resa = -1 ;
 
-# Début et fin d'une journée : valeur entières uniquement de 0 à 23
-# morningstarts doit être inférieur à  < eveningends.
+# Dï¿½but et fin d'une journï¿½e : valeur entiï¿½res uniquement de 0 ï¿½ 23
+# morningstarts doit ï¿½tre infï¿½rieur ï¿½  < eveningends.
 $morningstarts = 8;
 $eveningends   = 19;
 
-# Minutes à ajouter à l'heure $eveningends pour avoir la fin réelle d'une journée.
-# Examples: pour que le dernier bloc réservable de la journée soit 16:30-17:00, mettre :
+# Minutes ï¿½ ajouter ï¿½ l'heure $eveningends pour avoir la fin rï¿½elle d'une journï¿½e.
+# Examples: pour que le dernier bloc rï¿½servable de la journï¿½e soit 16:30-17:00, mettre :
 # eveningends=16 et eveningends_minutes=30.
-# Pour avoir une journée de 24 heures avec un pas de 15 minutes mettre :
+# Pour avoir une journï¿½e de 24 heures avec un pas de 15 minutes mettre :
 # morningstarts=0; eveningends=23;
 # eveningends_minutes=45; et resolution=900.
 $eveningends_minutes = 0;
 
-# Début de la semaine: 0 pour dimanche, 1 pou lundi, etc.
+# Dï¿½but de la semaine: 0 pour dimanche, 1 pou lundi, etc.
 $weekstarts = 1;
 
-# Format d'affichage du temps : valeur 0 pour un affichage « 12 heures » et valeur 1 pour un affichage  « 24 heure ».
+# Format d'affichage du temps : valeur 0 pour un affichage ï¿½ï¿½12 heuresï¿½ï¿½ et valeur 1 pour un affichage  ï¿½ï¿½24 heureï¿½ï¿½.
 $twentyfourhour_format = 1;
 
-# Ci-dessous des fonctions non officielles (non documentées) de GRR
-# En attendant qu'elles soient implémentées dans GRR avec une interface en ligne
+# Ci-dessous des fonctions non officielles (non documentï¿½es) de GRR
+# En attendant qu'elles soient implï¿½mentï¿½es dans GRR avec une interface en ligne
 
-# Vous pouvez indiquer ci-dessous l'id d'une ressource qui sera réservable, même par un simple visiteur
+# Vous pouvez indiquer ci-dessous l'id d'une ressource qui sera rï¿½servable, mï¿½me par un simple visiteur
 $id_room_autorise = "";
 
-# Possibilité de désactiver le bandeau supérieur dans le cas de simples visiteurs
-# Pour se connecter il est alors nécessaire de se rendre directement à l'adresse du type http://mon-site.fr/grr/login.php
-# Mettre ci-dessous $desactive_bandeau_sup = 1;  pour désactiver le bandeau supérieur pour les simples visiteurs.
-# Mettre ci-dessous $desactive_bandeau_sup = 0;  pour ne pas désactiver le bandeau supérieur pour les simples visiteurs.
+# Possibilitï¿½ de dï¿½sactiver le bandeau supï¿½rieur dans le cas de simples visiteurs
+# Pour se connecter il est alors nï¿½cessaire de se rendre directement ï¿½ l'adresse du type http://mon-site.fr/grr/login.php
+# Mettre ci-dessous $desactive_bandeau_sup = 1;  pour dï¿½sactiver le bandeau supï¿½rieur pour les simples visiteurs.
+# Mettre ci-dessous $desactive_bandeau_sup = 0;  pour ne pas dï¿½sactiver le bandeau supï¿½rieur pour les simples visiteurs.
 $desactive_bandeau_sup = 0;
 
 ?>

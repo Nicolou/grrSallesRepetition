@@ -16,11 +16,13 @@ pour fonctionner GRR à besoin :
 
 	- Si ce n'est as déjà fait (certains FAI impose une seule base de données) , créer une base de données MySql.
 	- créer un utilisateur ayant tout les droit sur cette base de données
+renseigner le fichier include/connect.inc.php avec les paramètre de connexion.
 	
 exécuter le fichier de script tables.my.sql pour la création des tables
 
 	mysql --user nico --password 'databasename' < tables.my.sql > restore.out
 
 
-le ficher se trouve dans include/connect.inc.php.
+
+
 
