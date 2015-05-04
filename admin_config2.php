@@ -63,8 +63,15 @@ if (isset($_GET['UserAllRoomsMaxBooking'])) {
 
 // Type d'accès
 if (isset($_GET['authentification_obli'])) {
-    if (!saveSetting("authentification_obli", $_GET['authentification_obli'])) {
-        echo "Erreur lors de l'enregistrement de authentification_obli !<br />";
+	if (!saveSetting("authentification_obli", $_GET['authentification_obli'])) {
+		echo "Erreur lors de l'enregistrement de authentification_obli !<br />";
+		die();
+	}
+}
+// access disable
+if (isset($_GET['disable_login'])) {
+    if (!saveSetting("disable_login", $_GET['disable_login'])) {
+        echo "Erreur lors de l'enregistrement de disable_login !<br />";
         die();
     }
 }
@@ -135,6 +142,20 @@ echo "<input type='radio' name='authentification_obli' value='0' "; if (getSetti
 echo "</td></tr>\n";
 echo "<tr><td>".get_vocab("authentification_obli1")."</td><td>\n";
 echo "<input type='radio' name='authentification_obli' value='1' "; if (getSettingValue("authentification_obli")=='1') echo "checked=\"checked\""; echo " />\n";
+echo "</td></tr>\n";
+echo "</table>\n";
+
+##########################################################
+#  site en maintenance ... (personne a part administrateurs 
+#           on le droit de entrer
+##########################################################
+echo "<h3>Site provisoirement inaccessible</h3>\n";
+echo "<table>\n";
+echo "<tr><td>non</td><td>\n";
+echo "<input type='radio' name='disable_login' value='no' "; if (getSettingValue("disable_login")!='yes') echo "checked=\"checked\""; echo " />\n";
+echo "</td></tr>\n";
+echo "<tr><td>oui</td><td>\n";
+echo "<input type='radio' name='disable_login' value='yes' "; if (getSettingValue("disable_login")=='yes') echo "checked=\"checked\""; echo " />\n";
 echo "</td></tr>\n";
 echo "</table>\n";
 
