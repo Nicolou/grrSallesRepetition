@@ -1,8 +1,7 @@
 <?php
 
-echo ("<H1>SALUT</H1>")  . PHP_EOL ;
-$debug=true;
-if ($debug) echo "<p> mode debug On </p>" . PHP_EOL;
+echo ("<H1>SALUT</H1>");
+
 /**
  * index.php
  * Ce script fait partie de l'application GRR
@@ -50,33 +49,20 @@ if ($debug) echo "<p> mode debug On </p>" . PHP_EOL;
 /* Pour ce script, on cherche � afficher toutes les erreurs PHP
 (sauf dans le cas d'un serveur LCS car sinon, des erreurs dues � des scripts LCS apparaissent.
 */
-if (!@file_exists("/var/www/lcs/includes/headerauth.inc.php")) {
-	if ($debug) echo "<p> report ALL ERROR </p>" . PHP_EOL;
+if (!@file_exists("/var/www/lcs/includes/headerauth.inc.php"))
     error_reporting (E_ALL);
-}
-if ($debug) echo "<p> pass here </p>" . PHP_EOL;
 require_once("include/config.inc.php");
-if ($debug) echo "<p> pass here </p>" . PHP_EOL;
-if (file_exists("include/connect.inc.php")) {
+if (file_exists("include/connect.inc.php"))
    include "include/connect.inc.php";
-   if ($debug) echo "<p> use connect.inc </p>" . PHP_EOL;
-	}
 require_once("include/misc.inc.php");
 require_once("include/functions.inc.php");
 require_once("include/settings.inc.php");
 // Param�tres langage
 include "include/language.inc.php";
 // Dans le cas d'une base mysql, on teste la bonne installation de la base et on propose une installation automatis�e.
-
-if ($debug) echo "<p> dbsys = $dbsys </p>" . PHP_EOL;
-
-
 if ($dbsys == "mysql")
 {
-	
-	
-   if ($debug) echo "<p> use mysql </p>" . PHP_EOL;
-	
+
   $flag='';
   $correct_install = '';
   $msg='';
@@ -85,8 +71,7 @@ if ($dbsys == "mysql")
   
       
       require_once("include/connect.inc.php");
-		
-   if ($debug) echo "<p> try to connect to $dbHost, $dbUser, $dbPass </p>" . PHP_EOL;
+ 
       
       if (@mysql_connect("$dbHost", "$dbUser", "$dbPass"))
     { 
@@ -105,9 +90,6 @@ if ($dbsys == "mysql")
              $msg = "<p>La connection au serveur $dbsys est �tablie mais certaines tables sont absentes de la base $dbDb.</p>";
              $correct_install = 'no';
           }
-		  if ($debug) echo "<p> connection OK </p>" . PHP_EOL;
-		  if ($debug) echo "<p> nbr of tables $test </p>" . PHP_EOL;
-		  
           /*
           // Premier test (test remplac� par le pr�c�dent car il semblerait que sur certaines installation, l'utilisateur de la base n'avait pas le droit d'�x�cuter "show tables" !)
           $liste2 = array();
@@ -166,8 +148,6 @@ if ($dbsys == "mysql")
         <?php
         die();
     }
-	
-	if ($debug) echo "<p> message des test msg = $msg </p>" . PHP_EOL;
 }
 require_once("include/$dbsys.inc.php");
 require_once("./include/session.inc.php");
@@ -184,10 +164,7 @@ $cook = session_get_cookie_params();
 // Cas d'une authentification CAS
 if ((getSettingValue('sso_statut') == 'cas_visiteur') or (getSettingValue('sso_statut') == 'cas_utilisateur'))
 {
-
   require_once("./include/cas.inc.php");
-  if ($debug) echo "<p> try CAS authentication </p>" . PHP_EOL;
-  
   // A ce stade, l'utilisateur est authentifi� par CAS
   $password = '';
   $user_ext_authentifie = 'cas';
@@ -234,8 +211,6 @@ if ((getSettingValue('sso_statut') == 'cas_visiteur') or (getSettingValue('sso_s
 }
 else if ((getSettingValue('sso_statut') == 'lemon_visiteur') or (getSettingValue('sso_statut') == 'lemon_utilisateur'))
 {
-  if ($debug) echo "<p> try SSO Lemonldap authentication </p>" . PHP_EOL;
-  
   if (isset($_GET['login'])) $login = $_GET['login']; else $login = "";
   if (isset($_COOKIE['user'])) $cookie_user=$_COOKIE['user']; else $cookie_user="";
   if(empty($cookie_user) or $cookie_user != $login)
@@ -283,8 +258,6 @@ else if ((getSettingValue('sso_statut') == 'lemon_visiteur') or (getSettingValue
 }
 else if (getSettingValue('sso_statut') == 'lcs')
 {
-	
-  if ($debug) echo "<p> try SSO LCS authentication </p>" . PHP_EOL;
   include LCS_PAGE_AUTH_INC_PHP;
   include LCS_PAGE_LDAP_INC_PHP;
   list ($idpers,$login) = isauth();
@@ -357,9 +330,6 @@ else if (getSettingValue('sso_statut') == 'lcs')
 if ((getSettingValue('sso_statut') == 'lasso_visiteur') or (getSettingValue('sso_statut') == 'lasso_utilisateur'))
 {
   require_once(SPKITLASSO.'/lassospkit_public_api.inc.php');
-  
-  if ($debug) echo "<p> try Lasso authentication </p>" . PHP_EOL;
-  
   if (lassospkit_nameid() == NULL)
     {
       // S'il y a eu une erreur et que l'on revient, afficher
@@ -488,8 +458,6 @@ else if ((getSettingValue('sso_statut') == 'http_visiteur') or (getSettingValue(
     // on obtient le login et le password sous la forme : user:password
 
 
-    if ($debug) echo "<p> try Apache authentication </p>" . PHP_EOL;
-	
     // Cas le plus courant :
     if (isset($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_USER'])) {
         $login = $_SERVER['PHP_AUTH_USER'];
@@ -574,8 +542,6 @@ else if ((getSettingValue('sso_statut') == 'http_visiteur') or (getSettingValue(
 }
 else
 {
-	
-  if ($debug) echo "<p> not authentication method found </p>" . PHP_EOL;
   if (getSettingValue("authentification_obli")==1)
     {
       if ($cook["path"] != '')
